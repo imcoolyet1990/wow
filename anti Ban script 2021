@@ -1,0 +1,6 @@
+wait(1)
+                game:GetService("StarterGui"):SetCore("SendNotification",{     
+                Title = "Anti Ban",     
+                Text = "open",
+                Duration = 10, })
+                wait(1)
