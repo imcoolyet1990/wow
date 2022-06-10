@@ -1,0 +1,10 @@
+end)
+	FastTween = false
+	AutoFarmTab:Toggle("Very Fast Tween ( Not Recommend For KaiTun )", false,function(a)
+		FastTween = a
+	end)
+	
+	fastattack = true
+	AutoFarmTab:Toggle("Fast Attack", true,function(a)
+		fastattack = a
+	end)
