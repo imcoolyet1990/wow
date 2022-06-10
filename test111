@@ -1,0 +1,18 @@
+AutoFarmTab:Toggle("Auto Farm Level", getgenv().Setting["Auto Farm Level"],function(a)
+		Auto_Farm = a
+		MainAutoFarmFunction:UpdateFarmMode("AutoFarmLevel")
+		if Auto_Farm then
+			MainAutoFarmFunction:Start()
+		else
+			MainAutoFarmFunction:Stop()
+		end
+	end)
+	FastTween = false
+	AutoFarmTab:Toggle("Very Fast Tween ( Not Recommend For KaiTun )", false,function(a)
+		FastTween = a
+	end)
+	
+	fastattack = true
+	AutoFarmTab:Toggle("Fast Attack", true,function(a)
+		fastattack = a
+	end)
