@@ -1,0 +1,5 @@
+
+	fastattack = true
+	AutoFarmTab:Toggle("Fast Attack", true,function(a)
+		fastattack = a
+	end)
