@@ -1,0 +1,2472 @@
+local v2 = game
+local v7 = require((v2.ReplicatedStorage:WaitForChild("Framework")):WaitForChild("Library"))
+while true do
+    local v8 = v7.Loaded
+    if v8 then
+        break
+    end
+    v2 = game
+    v8 = v2:GetService("RunService").Heartbeat
+    v8:Wait()
+end
+v10 = v7.GUI
+local v11 = v10.Bank
+local v12 = v7.Assets
+local v13 = v12.UI
+v10 = v13.Bank
+v13 = v7.GUI.BankLoading
+local v1896 = v11.Container.Settings
+local v15 = Random.new()
+local v18 = v7.Network.Invoke("Get Bank OSTime")
+local v19 = {}
+local v20 = false
+local v21 = {}
+local v22 = false
+local v23
+local v24 = false
+local v25 = false
+local v26 = false
+local v27 = 0
+local v28 = {}
+local v29 = 0
+local v30 = {}
+local v31 = false
+local v32 = false
+local v33 = false
+local v34 = 0
+local v35 = 0
+local v36
+local v37
+local v38
+local v39
+local v40 = 0
+local v41
+Deposit = function()
+    local v44 = v29
+    local v45 = 0
+    if v45 <= v44 then
+        local v46 = false
+    end
+    v46 = true
+    v45 = #v30
+    local v85 = 0
+    if v85 <= v45 then
+        v44 = false
+    end
+    v44 = true
+    v45 = v26
+    if not v45 then
+        v45 = v24
+        if not v45 then
+            if v44 then
+                if v46 then
+                    return 
+                end
+            end
+            v45 = ""
+            if not v44 then
+                if not v46 then
+                    v85 = "Are you sure you want to deposit "
+                    local v88 = #v30
+                    local v89 = 1
+                    if v88 > v89 then
+                        local v55 = "s"
+                    else
+                        v55 = ""
+                    end
+                    v89 = v7.Functions
+                    v88 = v89.Commas
+                    v45 = v85 .. v7.Functions.Commas(#v30) .. " Pet" .. v55 .. " and " .. v88(v29) .. " Diamonds?"
+                else
+                    if not v44 then
+                        v85 = "Are you sure you want to deposit "
+                        v57 = v7
+                        v59 = v57.Functions
+                        v58 = v59.Commas
+                        v57 = v30
+                        v59 = #v57
+                        v52 = v58(v59)
+                        v53 = " Pet"
+                        if #v30 > 1 then
+                            v55 = "s"
+                        else
+                            v55 = ""
+                        end
+                        v56 = "?"
+                        v45 = v85 .. v52 .. v53 .. v55 .. v56
+                    else
+                        if not v46 then
+                            v85 = "Are you sure you want to deposit "
+                            v60 = v7
+                            v56 = v60.Functions
+                            v55 = v56.Commas
+                            v56 = v29
+                            v52 = v55(v56)
+                            v53 = " Diamonds?"
+                            v45 = v85 .. v52 .. v53
+                        end
+                    end
+                end
+                v53 = v7
+                v52 = v53.Message
+                v85 = v52.New
+                v52 = v45
+                v53 = true
+                if not v85(v52, v53) then
+                    v62 = true
+                    Processing(true, v62)
+                    local v67 = v23.BUID
+                    v60 = v30
+                    v61 = v29
+                    local v70, v71 = v7.Network.Invoke("Bank Deposit", v67, v60, v61)
+                    Processing(true)
+                    if not v70 then
+                        v7.Audio.Play("rbxassetid://8168485698", script)
+                        v7.Message.New("\226\156\133 Success!")
+                        v26 = false
+                        UpdateDeposit()
+                        UpdateBank(v67)
+                        return 
+                    end
+                    v77 = v7
+                    v77.Message.New(v71 or "Dupe. Start!")
+                end
+                return 
+            end
+        end
+    end
+end
+Withdraw = function()
+    local v103 = v27
+    local v104 = 0
+    if v104 <= v103 then
+        local v105 = false
+    end
+    v105 = true
+    v104 = #v28
+    local v144 = 0
+    if v144 <= v104 then
+        v103 = false
+    end
+    v103 = true
+    v104 = v25
+    if not v104 then
+        v104 = v24
+        if not v104 then
+            if v103 then
+                if v105 then
+                    return 
+                end
+            end
+            v104 = ""
+            if not v103 then
+                if not v105 then
+                    v144 = "Are you sure you want to withdraw "
+                    local v147 = #v28
+                    local v148 = 1
+                    if v147 > v148 then
+                        local v114 = "s"
+                    else
+                        v114 = ""
+                    end
+                    v148 = v7.Functions
+                    v147 = v148.Commas
+                    v104 = v144 .. v7.Functions.Commas(#v28) .. " Pet" .. v114 .. " and " .. v147(v27) .. " Diamonds?"
+                else
+                    if not v103 then
+                        v144 = "Are you sure you want to withdraw "
+                        v116 = v7
+                        v118 = v116.Functions
+                        v117 = v118.Commas
+                        v116 = v28
+                        v118 = #v116
+                        v111 = v117(v118)
+                        v112 = " Pet"
+                        if #v28 > 1 then
+                            v114 = "s"
+                        else
+                            v114 = ""
+                        end
+                        v115 = "?"
+                        v104 = v144 .. v111 .. v112 .. v114 .. v115
+                    else
+                        if not v105 then
+                            v144 = "Are you sure you want to withdraw "
+                            v119 = v7
+                            v115 = v119.Functions
+                            v114 = v115.Commas
+                            v115 = v27
+                            v111 = v114(v115)
+                            v112 = " Diamonds?"
+                            v104 = v144 .. v111 .. v112
+                        end
+                    end
+                end
+                v112 = v7
+                v111 = v112.Message
+                v144 = v111.New
+                v111 = v104
+                v112 = true
+                if not v144(v111, v112) then
+                    v121 = true
+                    Processing(true, v121)
+                    local v126 = v23.BUID
+                    v119 = v28
+                    v120 = v27
+                    local v129, v130 = v7.Network.Invoke("Bank Withdraw", v126, v119, v120)
+                    Processing(false)
+                    if not v129 then
+                        v7.Audio.Play("rbxassetid://8168485924", script)
+                        v7.Message.New("\226\156\133 Success!")
+                        v25 = false
+                        UpdateWithdraw()
+                        UpdateBank(v126)
+                        return 
+                    end
+                    v136 = v7
+                    v136.Message.New(v130 or "Something went wrong. Try again!")
+                end
+                return 
+            end
+        end
+    end
+end
+UpgradeBank = function(p1)
+    local v162 = v24
+    if v162 then
+        return 
+    end
+    v162 = v23.Tier + 1
+    local v198 = v23
+    local v199 = v198.BUID
+    if not p1 then
+        v198 = v7.Directory.Banks[v162]
+        local v169, v170 = v7.Network.Invoke("Prompt Upgrade Bank", v199)
+        if not v169 then
+            v7.Functions.PromptPurchase(v198.ProductId, true)
+            return 
+        end
+        v7.Message.New(v170 or "Something went wrong. Try again later!")
+        return 
+    end
+    v169 = v7
+    v167 = v169.Message
+    v169 = "Are you sure you want to upgrade your bank to Tier "
+    v170 = v162
+    local v177 = "?"
+    v167 = v169 .. v170 .. v177
+    v169 = true
+    if not v167.New(v167, v169) then
+        Processing(true)
+        v170 = v7
+        v170 = v199
+        local v183, v184 = v170.Network.Invoke("Upgrade Bank", v170)
+        v177 = false
+        Processing(v177)
+        if not v183 then
+            v7.Audio.Play("rbxassetid://8167470240", script)
+            v174 = v162
+            v7.Message.New("\226\156\133 Success! Your bank is now Tier " .. v174 .. "!")
+            GetBank(v199)
+            UpdateSettings()
+            return 
+        end
+        v189 = v7
+        v189.Message.New(v184 or "Something went wrong. Try again!")
+    end
+end
+LeaveBank = function(p2)
+    if not v7.Message.New("Are you sure you want to leave this bank?", true) then
+        Processing(true)
+        local v222 = p2
+        if v222 then
+            v222 = v23.BUID
+        end
+        v223 = v7.Network.Invoke
+        local v226, v227 = v223("Leave Bank", v222)
+        Processing(false)
+        if not v226 then
+            GetMyBanks()
+            UpdateSide()
+            SwitchWindow("Empty")
+            return 
+        end
+        v7.Message.New(v227 or "Something went wrong. Try again!")
+    end
+end
+BuyBank = function()
+    local v250 = v7.Functions.Commas(v7.Directory.Banks[1].Cost)
+    local v251 = v250
+    local v252 = " Diamonds. Are you sure?"
+    if not v7.Message.New("This costs " .. v251 .. v252, true) then
+        Processing(true)
+        v251 = v7
+        local v258, v259 = v251.Network.Invoke("Buy Bank")
+        v251 = Processing
+        v252 = false
+        v251(v252)
+        if not v258 then
+            v250 = v7
+            v250 = script
+            v250.Audio.Play("rbxassetid://8167470240", v250)
+            v7.Message.New("\240\159\142\137 Congrats! You now own a bank account!")
+            GetMyBanks()
+            UpdateSide()
+            UpdateBank(v258)
+            return 
+        end
+        v262 = v7
+        v262.Message.New(v259 or "Something went wrong. Try again!")
+    end
+end
+CancelOutgoingInvites = function()
+    if not v7.Message.New("Are you sure? This will cancel ALL outgoing invites.", true) then
+        Processing(true)
+        local v292, v293 = v7.Network.Invoke("Cancel Bank Outgoing Invites")
+        Processing(false)
+        if not v292 then
+            v7.Message.New("Any outgoing invites are now canceled!")
+            return 
+        end
+        v295 = v7
+        v295.Message.New(v293 or "Something went wrong. Try again!")
+    end
+end
+DecideInvite = function(p3)
+    if not v7.Message.New("Do you want to accept this invite?", true) then
+        local v314, v315 = v7.Network.Invoke("Accept Bank Invite", p3)
+        if not v314 then
+            v7.Message.New("Success! You are now a member.")
+            GetMyBanks()
+            GetMyInvites()
+            UpdateSide()
+            UpdateBank(p3)
+            return 
+        end
+        v316 = v7
+        v316.Message.New(v315 or "Something went wrong. Try again!")
+        return 
+    end
+    v315 = v7.Network
+    v314 = v315.Invoke
+    v315 = "Decline Bank Invite"
+    local v327, v328 = v314(v315, p3)
+    if not v327 then
+        GetMyInvites()
+        UpdateSide()
+    end
+end
+InviteToBank = function(p4)
+    local v339
+    if not pcall(function()
+        v339 = game.Players:GetUserIdFromNameAsync(p4 or "")
+    end) then
+        if v339 then
+            v7.Message.New("Couldn't find player. Are you sure that's the correct @?")
+            return 
+        end
+        v348 = v7
+        v348 = "Are you sure you want to invite "
+        local v353 = p4
+        local v354 = " to your bank? They will have access to your pets & diamonds."
+        v348 = true
+        if not v348.Message.New(v348 .. v353 .. v354, v348) then
+            Processing(true)
+            v353 = v7
+            v354 = v23
+            v353 = v354.BUID
+            v354 = v339
+            local v360, v361 = v353.Network.Invoke("Invite To Bank", v353, v354)
+            Processing(false)
+            if not v360 then
+                v7.Message.New("\240\159\147\169 Bank invite sent to " .. p4 .. "!")
+            else
+                v364 = v7
+                v364.Message.New(v361 or "Something went wrong. Try again!")
+            end
+        end
+        return 
+    end
+end
+KickMember = function(p5, p6)
+    local v381 = p6
+    local v382 = " from your bank?"
+    if not v7.Message.New("Are you sure you want to kick " .. v381 .. v382, true) then
+        Processing(true)
+        local v387 = v23.BUID
+        v382 = v7
+        v381 = v382.Network
+        v381 = "Kick From Bank"
+        v382 = v387
+        local v389, v390 = v381.Invoke(v381, v382, p5)
+        Processing(false)
+        if not v389 then
+            v7.Message.New("\226\156\133 Player has been kicked.")
+            GetBank(v387)
+            UpdateSettings()
+            return 
+        end
+        v393 = v7
+        v393.Message.New(v390 or "Something went wrong. Try again!")
+    end
+end
+CollectInterest = function()
+    local v408 = v24
+    if v408 then
+        return 
+    end
+    v408 = Processing
+    v408(true)
+    local v411 = v23.BUID
+    local v414, v415 = v7.Network.Invoke("Collect Bank Interest", v411)
+    Processing(false)
+    if not v414 then
+        v7.Audio.Play("rbxassetid://8345225819", script, 1, 1.5)
+        v7.Signal.Fire("Rain Diamonds", 3)
+        v7.Message.New("\240\159\146\142 " .. v7.Functions.Commas(v415.increase) .. " Diamonds has been added to your bank! Come back again in 24hr!")
+        UpdateBank(v411)
+        return 
+    end
+    v426 = v7
+    v426.Message.New(v415 or "Something went wrong. Try again!")
+end
+UpdateBank = function(p7)
+    local v452 = v11.Container
+    local v453 = v452.Bank
+    local v609 = v453.Pets
+    local v610 = v453.Bottom.Balance
+    local v611 = v453.Top
+    local function LocalProcessing_1(p8)
+        local v457 = v11
+        local v458 = v457.Container
+        local v459 = v458.Bank
+        local v460 = v459.Processing
+        if not p8 then
+            v459 = v39
+            if v459 then
+                v457 = v7
+                v458 = v457.GIF
+                v459 = v458.Create
+                v458 = v460.GIF
+                v457 = {}
+                v457[1] = 100
+                v457[2] = 100
+                local v468 = {}
+                v468[1] = 5
+                v468[2] = 6
+                v39 = v459(v458, v457, v468, 28, 0.65, true)
+                v460.Visible = true
+                v453.NoPets.Visible = false
+                v452.Visible = false
+                return 
+            end
+        end
+        v465 = v39
+        if not v465 then
+            v465 = v39
+            v465()
+            v39 = nil
+            v460.Visible = false
+            v466 = true
+            v452.Visible = v466
+        end
+    end
+    local v479 = v40
+    if p7 ~= v479 then
+        v479 = LocalProcessing_1
+        v479(true)
+        v40 = p7
+        v611.PetsAm.Text = ""
+        v610.Amount.Text = ""
+        v453.Pets.CanvasPosition = Vector2.new()
+    end
+    v481 = nil
+    if not p7 then
+        v483 = GetBank
+        v481 = v483(p7)
+        v25 = false
+        UpdateWithdraw()
+    end
+    local v486 = v24
+    if v486 then
+        v486 = ipairs
+        local v488, v489, v490 = v486(v609:GetChildren())
+        for v495, v493 in v488, v489, v490 do
+            if not v493:GetAttribute("PetId") then
+                v493:Destroy()
+            end
+        end
+        if not v481 then
+            v488 = string.find
+            v489 = v481
+            v490 = "banned"
+            local v496 = v488(v489, v490)
+            if not v496 then
+                v41 = p7
+                v496 = SwitchWindow
+                v496("Banned")
+            end
+        end
+        return 
+    end
+    SwitchWindow("Bank")
+    UpdateSide()
+    local v501 = {}
+    v495 = v23
+    local v503 = v495.Storage.Pets
+    v495 = v7
+    v493 = "CustomUserId"
+    local v504 = v495.LocalPlayer:GetAttribute(v493)
+    if v504 then
+        v495 = v7.LocalPlayer
+        v504 = v495.UserId
+    end
+    local v506 = v23
+    v505 = v506.Owner
+    if v505 ~= v504 then
+        v495 = false
+    end
+    v495 = true
+    v505 = v453.Bottom.Settings
+    v505.Visible = v495
+    v505 = v453.Top.Search
+    local v621 = false
+    local v507 = v505.Query
+    local v508 = v507.Text
+    if v508 == "" then
+        v508 = tostring
+        v507 = v505.Query.Text
+        if v508(v507) == nil then
+            v621 = false
+        end
+        v621 = true
+    end
+    if not v621 then
+        v510 = string.lower
+        v509 = v505.Query.Text
+        local v513 = v510(tostring(v509))
+        if v513 then
+            v513 = nil
+        end
+        local v514 = 0
+        local v515 = v7
+        v503 = v515.Shared.SortPets(v503)
+        local v519, v520, v515 = pairs(v503)
+        for v549, v522 in v519, v520, v515 do
+            local v521 = v522.uid
+            local v526 = v7.Directory.Pets[v522.id]
+            local v528 = v452:FindFirstChild(v521)
+            if v528 then
+                v514 = v514 + 1
+                local v529 = v514 % 250
+                if v529 == 0 then
+                    v529 = v7.Heartbeat
+                    v529()
+                end
+                v530 = v7.Assets.UI.Inventory
+                v528 = v530.Pet:Clone()
+                v528.Name = v521
+                v528:SetAttribute("PetId", v521)
+                v530 = v7.PetUI
+                v530 = v528
+                v530.Create(v530, v521, v522)
+                v7.GUIFX.ButtonFX(v528)
+                v528.Parent = v452
+                v528.Activated:Connect(function()
+                    local v543 = v31
+                    if v543 then
+                        v543 = v25
+                        if not v543 then
+                            v543 = true
+                            v31 = v543
+                            v543 = SelectPet
+                            v543(v28, v521)
+                            UpdateBank()
+                            UpdateWithdraw()
+                            v31 = false
+                        end
+                    end
+                end)
+            end
+            v528.LayoutOrder = v549
+            local v553 = v33
+            if not v553 then
+                local v554 = 1.5
+            else
+                v554 = 3.5
+            end
+            v528.Level:FindFirstChildOfClass("UIStroke").Thickness = v554
+            v554 = v25
+            if not v554 then
+                v553 = v7.Functions
+                v554 = v553.SearchArray
+                v553 = v28
+                local v556 = v554(v553, v521)
+            end
+            if not v556 then
+                local v557 = v528.Equipped
+                local v558 = v557.Visible
+                if v558 then
+                    v558 = v528.Equipped
+                    v557 = UDim2.new
+                    v531 = 0.8
+                    v558.Size = v557(v531, 0, 0.8, 0)
+                    v558 = v7.Functions.FastTween
+                    local v636 = {}
+                    v636.Size = UDim2.new(0.4, 0, 0.4, 0)
+                    local v637 = {}
+                    v637[1] = 0.25
+                    v637[2] = "Back"
+                    v637[3] = "Out"
+                    v558(v528.Equipped, v636, v637)
+                end
+            end
+            v528.Equipped.Visible = v556
+            local v577 = Color3.fromRGB(69, 239, 69)
+            if v577 then
+                v577 = Color3.fromRGB
+                local v581 = v577(59, 177, 252)
+            end
+            v528.BackgroundColor3 = v581
+            if not v506 then
+                v581 = false
+                v570 = 1
+                v571 = true
+                local v587 = string.find(string.lower(v526.name), v513, v570, v571)
+                if not v587 then
+                    v581 = true
+                else
+                    v587 = string.find
+                    local v594 = v587(string.lower(v522.nk), v513, 1, true)
+                    if not v594 then
+                        v581 = true
+                    else
+                        v594 = string.find
+                        if not v594(string.lower(v526.rarity), v513, 1, true) then
+                            v581 = true
+                        end
+                    end
+                end
+                v601 = v581 or v556
+                v528.Visible = v601
+            else
+                v581 = true
+                v528.Visible = v581
+            end
+            v581 = true
+            v501[v521] = v581
+        end
+        v519 = ipairs
+        local v602, v603, v515 = v519(v609:GetChildren())
+        for v549, v522 in v602, v603, v515 do
+            v525 = "PetId"
+            local v604 = v522:GetAttribute(v525)
+            if not v604 then
+                v526 = v501[v604]
+                if v526 then
+                    v522:Destroy()
+                end
+            end
+        end
+        v602 = v453.NoPets
+        v603 = "Bank is empty. Deposit some pets! \240\159\153\130"
+        v602.Text = v603
+        v602 = v453.NoPets
+        v515 = #v503
+        v549 = 0
+        if v515 < v549 then
+            v603 = false
+        end
+        v603 = true
+        v602.Visible = v603
+        v602 = v610.Amount
+        v549 = v7
+        v515 = v549.Functions
+        v603 = v515.NumberShorten
+        v604 = v23
+        v522 = v604.Storage
+        v549 = v522.Currency
+        v549 = false
+        local v605 = v603(v549.Diamonds, v549)
+        if not v556 then
+            v602.Text = v605
+            v602 = v611.PetsAm
+            v605 = #v503 .. " Pets"
+            v602.Text = v605
+            v602 = v611.Grid
+            if not v33 then
+                v605 = "rbxassetid://6958935961"
+            else
+                v605 = "rbxassetid://6958936066"
+            end
+            v602.Image = v605
+            v602 = BankScrolling
+            v602()
+            v605 = false
+            LocalProcessing_1(v605)
+            return 
+        end
+    end
+end
+UpdateSide = function()
+    local v643 = v11.Side
+    local v644 = v643.Holder
+    v34 = v34 + 1
+    local v645 = 1
+    local v770 = 2
+    local v771 = 1
+    for v645 = v645, v770, v771 do
+        if v645 == 1 then
+            local v646 = "_BanksLoading"
+        else
+            v646 = "_InvitesLoading"
+        end
+        local v648 = v644:FindFirstChild(v646)
+        local v649 = v20
+        v649 = v22
+        if v648 then
+            v649 = v10.Side.Loading
+            local v652 = v649:Clone()
+            v648 = v652
+            if v645 == 1 then
+                v652 = 2
+            else
+                v652 = 101
+            end
+            v648.LayoutOrder = v652
+            if v645 == 1 then
+                v652 = "_BanksLoading"
+            else
+                v652 = "_InvitesLoading"
+            end
+            v648.Name = v652
+            v648.Parent = v644
+            local v776 = {}
+            v776[1] = 100
+            v776[2] = 100
+            local v777 = {}
+            v777[1] = 5
+            v777[2] = 6
+            v7.GIF.Create(v648.GIF, v776, v777, 28, 0.65, true)
+            if not v648 then
+                v648:Destroy()
+            end
+        end
+    end
+    v770 = v20
+    if v645 == 1 then
+        if not v770 then
+            v770 = false
+            v771 = ipairs
+            v645 = v19
+            local v658, v659, v648 = v771(v645)
+            for v714, v661 in v658, v659, v648 do
+                local v660 = v661.BUID
+                local v662 = v661.Owner
+                local v663 = v7
+                local v666 = v663.LocalPlayer:GetAttribute("CustomUserId")
+                if v666 then
+                    v663 = v7.LocalPlayer
+                    v666 = v663.UserId
+                end
+                if v662 ~= v666 then
+                    v663 = false
+                end
+                local v781 = true
+                local v669 = v644:FindFirstChild(v660)
+                if v669 then
+                    if not v781 then
+                        v669 = v10.Side.MyBank:Clone()
+                        v669.LayoutOrder = 2
+                    else
+                        v670 = v10
+                        v671 = v670.Side
+                        v673 = v671.Account
+                        v669 = v673:Clone()
+                        v669.LayoutOrder = 10
+                        v671 = function()
+                            v669.Owner.Text = "..."
+                            v669.Owner.Text = "@" .. v7.Functions.UserIdToUsername(v662) or "???"
+                        end
+                        (coroutine.wrap(v671))()
+                    end
+                    v669.Name = v660
+                    v669.Parent = v644
+                    v670 = v7
+                    v670.GUIFX.ButtonFX(v669)
+                    v670 = function()
+                        local v693 = v31
+                        if v693 then
+                            v693 = true
+                            v31 = v693
+                            v693 = v7.Audio.Play
+                            local v704 = {}
+                            v704[1] = "rbxassetid://8168486176"
+                            v704[2] = "rbxassetid://8168485794"
+                            v693(v704, script, v15:NextNumber(0.95, 1.01), 0.5)
+                            UpdateBank(v660)
+                            v31 = false
+                        end
+                    end
+                    v669.Activated:Connect(v670)
+                end
+                v669:SetAttribute("Tick", v34)
+                local v711 = v24
+                if not v711 then
+                    if v23.BUID ~= v660 then
+                        v711 = false
+                    end
+                    v711 = true
+                end
+                if not v711 then
+                    v713 = "rbxassetid://8121303915"
+                    v669.Image = v713
+                    v713 = "rbxassetid://8121307910"
+                    v669.HoverImage = v713
+                else
+                    v713 = "rbxassetid://6869680115"
+                    v669.Image = v713
+                    v713 = "rbxassetid://6903539993"
+                    v669.HoverImage = v713
+                end
+                v643 = v643 or v781
+            end
+            v648 = "_BuyBankButton"
+            local v715 = v644:FindFirstChild(v648)
+            if v770 then
+                if v715 then
+                    v714 = v10
+                    v659 = v714.Side.BuyAccount
+                    v715 = v659:Clone()
+                    v715.LayoutOrder = 2
+                    v715.Name = "_BuyBankButton"
+                    v715.Parent = v644
+                    v714 = v7
+                    v714.GUIFX.ButtonFX(v715)
+                    v714 = function()
+                        local v719 = v31
+                        if v719 then
+                            v719 = true
+                            v31 = v719
+                            v719 = BuyBank
+                            v719()
+                            v31 = false
+                        end
+                    end
+                    v715.Activated:Connect(v714)
+                else
+                    if not v770 then
+                        if not v715 then
+                            v715:Destroy()
+                        end
+                    end
+                end
+                v770 = v22
+                if not v770 then
+                    v715 = #v21
+                    local v791 = 0
+                    if v791 <= v715 then
+                        v770 = false
+                    end
+                    v770 = true
+                    if not v770 then
+                        v715 = ipairs
+                        v791 = v21
+                        local v723, v724, v725 = v715(v791)
+                        for v754, v661 in v723, v724, v725 do
+                            v660 = v661.BUID
+                            v669 = "INVITE-"
+                            v711 = v660
+                            v663 = v669 .. v711
+                            local v726 = v644:FindFirstChild(v663)
+                            if v726 then
+                                v669 = v10
+                                v666 = v669.Side.Invite
+                                v726 = v666:Clone()
+                                v669 = v660
+                                v726.Name = "INVITE-" .. v669
+                                (coroutine.wrap(function()
+                                    v726.Player.Text = "..."
+                                    v726.Player.Text = "@" .. v7.Functions.UserIdToUsername(v661.Sender) or "???"
+                                end))()
+                                v726.LayoutOrder = v661.Timestamp
+                                v726.Parent = v644
+                                v669 = v7
+                                v669.GUIFX.ButtonFX(v726)
+                                v669 = function()
+                                    local v748 = v31
+                                    if v748 then
+                                        v748 = true
+                                        v31 = v748
+                                        v748 = DecideInvite
+                                        v748(v661.BUID)
+                                        v31 = false
+                                    end
+                                end
+                                v726.Activated:Connect(v669)
+                            end
+                            v711 = v34
+                            v726:SetAttribute("Tick", v711)
+                        end
+                    end
+                    v725 = "_NoInvites"
+                    local v755 = v644:FindFirstChild(v725)
+                    if v770 then
+                        if v755 then
+                            v754 = v10
+                            v724 = v754.Side.Desc
+                            local v757 = v724:Clone()
+                            v754 = "No invites pending."
+                            v757.Title.Text = v754
+                            v757.Name = "_NoInvites"
+                            v757.LayoutOrder = 101
+                            v757.Parent = v644
+                        else
+                            if not v770 then
+                                if not v755 then
+                                    v755:Destroy()
+                                end
+                            end
+                        end
+                        v770 = ipairs
+                        local v758, v759, v760 = v770(v644:GetChildren())
+                        for v756, v754 in v758, v759, v760 do
+                            v726 = "Tick"
+                            local v761 = v754:GetAttribute(v726)
+                            if not v761 then
+                                v660 = v34
+                                if v761 ~= v660 then
+                                    v754:Destroy()
+                                end
+                            end
+                        end
+                        v760 = "_Banks"
+                        v756 = "_Invites"
+                        local v764 = v644:FindFirstChild(v756).Title
+                        v761 = v21
+                        v754 = #v761
+                        v761 = 1
+                        if v754 >= v761 then
+                            v754 = "Invites ("
+                            local v765 = v21
+                            v761 = #v765
+                            local v766 = "/50)"
+                            local v767 = v754 .. v761 .. v766
+                            if v767 then
+                                v767 = "Invites"
+                            end
+                            v764.Text = v767
+                            v764 = v644:FindFirstChild(v760).Title
+                            v761 = v19
+                            v754 = #v761
+                            v761 = 1
+                            if v754 >= v761 then
+                                v754 = "Banks ("
+                                v765 = v19
+                                v761 = #v765
+                                v766 = "/5)"
+                                v767 = v754 .. v761 .. v766
+                                if v767 then
+                                    v767 = "Banks"
+                                end
+                                v764.Text = v767
+                                v764 = SideScrolling
+                                v764()
+                                return 
+                            end
+                        end
+                    end
+                end
+            end
+        end
+        if not v649 then
+            if v645 == 2 then
+                if v649 then
+                end
+            end
+        end
+    end
+end
+UpdateHistory = function()
+    local v861 = v12.History
+    local v863, v864, v865 = ipairs(v861.Logs:GetChildren())
+    for v868, v867 in v863, v864, v865 do
+        if v867.ClassName == "Frame" then
+            v867:Destroy()
+        end
+    end
+    v864 = v23
+    v863 = v864.History
+    v864 = ipairs
+    v865 = v863
+    local v869, v870, v868 = v864(v865)
+    for v867, u1 in v869, v870, v868 do
+        local v874 = v10.History.HistoryLog:Clone()
+        v874.LayoutOrder = v867
+        v874.desc.Text = "Loading..."
+        v874.date.Text = ""
+        v874.Name = "Log" .. v867
+        v874.Parent = v861.Logs
+        (coroutine.wrap(function()
+            local v878, v879 = (function(p9)
+                local v804 = p9.kind
+                local v805 = {}
+                v805[1] = "%s deposited %s pets & %s Diamonds."
+                v805[2] = "%s withdrew %s pets & %s Diamonds."
+                v805[3] = "%s was invited."
+                v805[4] = "%s was kicked."
+                v805[5] = "%s left!"
+                v805[6] = "%s joined!"
+                v805[7] = "Upgraded to Tier %s."
+                v805[8] = "Collected %s Diamonds."
+                v805[9] = "%s pet(s) were deleted for being duplicated."
+                local v845
+                if v804 == 1 then
+                    if v804 == 2 then
+                        local v850 = p9.diamonds
+                        local v818 = string.format(v805[v804], v7.Functions.UserIdToUsername(p9.sender), v7.Functions.Commas(p9.pets), v7.Functions.NumberShorten(v850 or 0))
+                        v845 = v818
+                        if v804 == 3 then
+                            if v804 == 4 then
+                                if v804 == 5 then
+                                    if v804 == 6 then
+                                        v818 = string.format
+                                        local v820 = v7
+                                        local v852 = p9.target
+                                        if v852 then
+                                            v852 = p9.sender
+                                        end
+                                        local v823 = v818(v805[v804], v820.Functions.UserIdToUsername(v852))
+                                        v845 = v823
+                                        if v804 == 7 then
+                                            if v804 == 8 then
+                                                v823 = string.format
+                                                v820 = v7
+                                                v820 = p9.amount
+                                                v845 = v823(v805[v804], v820.Functions.NumberShorten(v820 or 0))
+                                            else
+                                                if v804 == 9 then
+                                                    v827 = string.format
+                                                    v820 = v7
+                                                    v820 = p9.pets
+                                                    v845 = v827(v805[v804], v820.Functions.Commas(v820 or 0))
+                                                end
+                                            end
+                                            v831 = v18 - p9.ts
+                                            v850 = v7
+                                            v820 = v850.Functions.TimeString
+                                            local v857 = v820(v831) .. " ago"
+                                            local v858 = 120
+                                            if v858 >= v831 then
+                                                v857 = "Just now"
+                                            end
+                                            v858 = v845
+                                            return v858, v857
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end)(u1)
+            local v880 = v874
+            if not v880 then
+                local v881 = v874
+                v880 = v881.Parent
+                if not v880 then
+                    v881 = v874
+                    v880 = v881.desc
+                    v880.Text = v878
+                    v881 = v874
+                    v880 = v881.date
+                    v880.Text = v879
+                end
+            end
+        end))()
+    end
+    v869 = #v863
+    v870 = 0
+    if v870 >= v869 then
+        v868 = v10
+        v870 = v868.History
+        v869 = v870.HistoryLog
+        local v883 = v869:Clone()
+        v870 = 1
+        v883.LayoutOrder = v870
+        v870 = v883.desc
+        v868 = "No recent history"
+        v870.Text = v868
+        v870 = "Log1"
+        v883.Name = v870
+        v870 = v861.Logs
+        v883.Parent = v870
+    end
+end
+UpdateMembers = function()
+    local v895 = v12
+    local v944 = v895.Members.Members.List
+    local v899, v900, v901 = ipairs(v944:GetChildren())
+    for v904, v903 in v899, v900, v901 do
+        if v903.ClassName == "Frame" then
+            v903:Destroy()
+        end
+    end
+    v901 = v10
+    v900 = v901.Settings
+    v899 = v900.Owner
+    local v905 = v899:Clone()
+    v900 = v905.Username
+    v903 = v7
+    v904 = v903.LocalPlayer
+    v901 = v904.Name
+    v900.Text = v901
+    v900 = 1
+    v905.LayoutOrder = v900
+    v905.Parent = v944
+    v901 = v23
+    v900 = v901.Players
+    v901 = ipairs
+    v904 = v944:GetChildren()
+    local v906, v907, v903 = v901(v904)
+    for v912, u2 in v906, v907, v903 do
+        local v909 = v10.Settings
+        local v911 = v909.Member:Clone()
+        v909 = v912 + 1
+        v911.LayoutOrder = v909
+        v909 = nil
+        (coroutine.wrap(function()
+            v909 = v7.Functions.UserIdToUsername(u2)
+            v911.Username.Text = "@" .. v909 or "???"
+        end))()
+        v911.Parent = v895
+        v7.GUIFX.ButtonFX(v911.Kick)
+        v911.Kick.Activated:Connect(function()
+            local v931 = v31
+            if v931 then
+                v931 = true
+                v31 = v931
+                v931 = KickMember
+                v931(u2, "@" .. v909 or "[UNKNOWN PLAYER]")
+                v31 = false
+            end
+        end)
+    end
+    u2 = v7
+    v912 = u2.Directory
+    v903 = v912.Banks
+    u2 = v23
+    v912 = u2.Tier
+    v907 = v903[v912]
+    v906 = v907.MaxPlayers
+    v912 = #v900
+    v903 = v912 + 1
+    v907 = v906 - v903
+    v911 = 6
+    local v938 = #v900
+    v909 = v938 + 1
+    u2 = v911 - v909
+    v912 = u2 - v907
+    u2 = 0
+    v903 = math.max
+    v911 = 1
+    local v940 = v907
+    local v941 = 1
+    for v911 = v911, v940, v941 do
+        v929 = v10
+        v938 = v929.Settings
+        v909 = v938.MemberEmpty
+        local v942 = v909:Clone()
+        v929 = 20
+        v938 = v929 + v911
+        v942.LayoutOrder = v938
+        v942.Parent = v895
+    end
+    v911 = 1
+    v940 = v903(v912, u2)
+    v941 = 1
+    for v911 = v911, v940, v941 do
+        v929 = v10
+        v938 = v929.Settings
+        v942 = v938.MemberLocked
+        local v943 = v942:Clone()
+        v929 = 100
+        v938 = v929 + v911
+        v943.LayoutOrder = v938
+        v943.Parent = v895
+    end
+end
+UpdateUpgrades = function()
+    local v950 = v12
+    local v951 = v950.Upgrades
+    local v954 = v7.Directory.Banks
+    local v981 = v954[v23.Tier]
+    local v956 = v7.Directory.Banks[v23.Tier + 1]
+    local v987 = not v956
+    v951.CostFrame.isMax.Visible = v987
+    v951.CostFrame.Cost.Visible = not v987
+    v951.CostFrame.Currency.Visible = not v987
+    v951.Buttons.Visible = not v987
+    local v957 = v981.Tier
+    v951.Info.Current.Tier.Text = "Tier " .. v957
+    local v1003 = v951.Info
+    local v1005 = v1003.Current.Title
+    local v1006 = v981.Title
+    v1005.Text = v1006
+    if v987 then
+        v1003 = v951.Info
+        v1006 = v1003.New
+        v1005 = v1006.Tier
+        v1003 = "Tier "
+        v957 = v956.Tier
+        v1006 = v1003 .. v957
+        v1005.Text = v1006
+        v1003 = v951.Info
+        v1006 = v1003.New
+        v1005 = v1006.Title
+        v1006 = v956.Title
+        v1005.Text = v1006
+        v1006 = v951.CostFrame
+        v1005 = v1006.Cost
+        v957 = v7
+        v1003 = v957.Functions
+        v1006 = v1003.NumberShorten
+        v1003 = v956.Cost
+        v957 = false
+        local v958 = v1006(v1003, v957)
+        v1005.Text = v958
+        v1005 = v956.ProductId
+        if v1005 == 0 then
+            v958 = v951.Buttons.BuyRobux
+            v1005 = v958.Robux
+            v958 = v7.Functions.Commas
+            v1005.Text = v958(v7.Functions.GetPrice(v956.ProductId, true))
+            v1005 = v951.Buttons.BuyRobux
+            v1005.Visible = true
+        else
+            v962 = v951.Buttons
+            v1005 = v962.BuyRobux
+            v962 = false
+            v1005.Visible = v962
+            v962 = v951.Info.New
+            v1005 = v962.Tier
+            v962 = "Max"
+            v1005.Text = v962
+            v962 = v951.Info.New
+            v1005 = v962.Title
+            v962 = "You have the best bank!"
+            v1005.Text = v962
+        end
+        v1005 = ipairs
+        v962 = v951.Stats
+        local v964, v965, v963 = v1005(v962:GetChildren())
+        for v978, v967 in v964, v965, v963 do
+            local v966 = v967.ClassName
+            if v966 == "Frame" then
+                v966 = v967.Name
+                if v966 == "MaxDiamonds" then
+                    v966 = v967.Old.Amount
+                    local v972 = v7.Functions.NumberShorten(v950.MaxDiamonds, false)
+                    local v973 = v972
+                    local v974 = " Cap"
+                    v966.Text = v973 .. v974
+                    local v1018 = v967.New
+                    v966 = v1018.Amount
+                    if not v954 then
+                        v1018 = "Max"
+                    else
+                        v972 = v7.Functions.NumberShorten
+                        v973 = v972(v956.MaxDiamonds, false)
+                        v974 = " Cap"
+                        v1018 = v973 .. v974
+                    end
+                    v966.Text = v1018
+                else
+                    v966 = v967.Name
+                    if v966 == "Interest" then
+                        v968 = v967.Old
+                        v966 = v968.Amount
+                        v973 = v950.Interest
+                        if v973 == 0 then
+                            v968 = "None"
+                        else
+                            v973 = v950.Interest
+                            v974 = "%"
+                            v968 = v973 .. v974
+                        end
+                        v966.Text = v968
+                        v968 = v967.New
+                        v966 = v968.Amount
+                        if not v954 then
+                            v968 = "Max"
+                        else
+                            v973 = v956.Interest
+                            v974 = "%"
+                            v968 = v973 .. v974
+                        end
+                        v966.Text = v968
+                    else
+                        v966 = v967.Name
+                        if v966 == "MaxPlayers" then
+                            v968 = v967.Old
+                            v966 = v968.Amount
+                            v973 = v950.MaxPlayers
+                            v974 = " Players"
+                            v968 = v973 .. v974
+                            v966.Text = v968
+                            v968 = v967.New
+                            v966 = v968.Amount
+                            if not v954 then
+                                v968 = "Max"
+                            else
+                                v973 = v956.MaxPlayers
+                                v974 = " Players"
+                                v968 = v973 .. v974
+                            end
+                            v966.Text = v968
+                        else
+                            v966 = v967.Name
+                            if v966 == "PetSlots" then
+                                v968 = v967.Old
+                                v966 = v968.Amount
+                                v973 = v950.PetSlots
+                                v974 = " Pets"
+                                v968 = v973 .. v974
+                                v966.Text = v968
+                                v968 = v967.New
+                                v966 = v968.Amount
+                                if not v954 then
+                                    v968 = "Max"
+                                else
+                                    v973 = v956.PetSlots
+                                    v974 = " Pets"
+                                    v968 = v973 .. v974
+                                end
+                                v966.Text = v968
+                            end
+                        end
+                    end
+                end
+            end
+        end
+        return 
+    end
+end
+UpdateSettings = function()
+    local v1022 = v24
+    if v1022 then
+        return 
+    end
+    v1022 = UpdateUpgrades
+    v1022()
+    UpdateHistory()
+    UpdateMembers()
+    SwitchWindow("Settings")
+end
+SelectPet = function(p10, p11)
+    local v1030, v1031, v1032 = ipairs(p10)
+    for v1045, v1033 in v1030, v1031, v1032 do
+        if v1033 == p11 then
+            v7.Audio.Play("rbxassetid://7139317909", script, v15:NextNumber(0.95, 1.05), 0.75)
+            table.remove(p10, v1045)
+            return 
+        end
+    end
+    v1030 = #p10
+    v1045 = v7
+    v1032 = v1045.Shared
+    v1031 = v1032.BankMaxPetsPerTransaction
+    if v1031 > v1030 then
+        v1032 = v7
+        v1031 = v1032.Audio
+        v1030 = v1031.Play
+        v1031 = "rbxassetid://7139317934"
+        v1032 = script
+        v1045 = v15
+        v1033 = 0.75
+        v1030(v1031, v1032, v1045:NextNumber(0.95, 1.05), v1033)
+        table.insert(p10, p11)
+    end
+end
+UpdateDeposit = function()
+    local v1055 = v11
+    v1055.Container.Visible = not v26
+    v11.Side.Visible = not v26
+    v11.Deposit.Visible = v26
+    local v1058 = v7.Save.Get()
+    if v1058 then
+        return 
+    end
+    local v1180 = v11.Deposit.Pets
+    local v1060 = v11
+    local v1061 = v1060.Deposit
+    local v1182 = v1061.Bottom.Diamonds
+    local v1183 = v26
+    if v1183 then
+        v1183 = {}
+        v30 = v1183
+        v1183 = 0
+        v29 = v1183
+        v1183 = v1182.Input
+        v1061 = ""
+        v1183.Text = v1061
+        v1183 = ipairs
+        local v1062, v1063, v1060 = v1183(v1180:GetChildren())
+        for v1066, v1065 in v1062, v1063, v1060 do
+            if v1065.ClassName == "Frame" then
+                v1065:Destroy()
+            end
+        end
+        return 
+    end
+    v1066 = v11
+    v1060 = v1066.Deposit
+    v1063 = v1060.Top
+    v1062 = v1063.Search
+    v1063 = false
+    v1066 = v1062.Query
+    local v1184 = v1066.Text
+    if v1184 == "" then
+        v1184 = tostring
+        v1065 = v1062.Query
+        v1066 = v1065.Text
+        if v1184(v1066) == nil then
+            v1063 = false
+        end
+        v1063 = true
+    end
+    if not v1063 then
+        v1067 = string.lower
+        local v1068 = tostring
+        v1065 = v1062.Query.Text
+        local v1070 = v1067(v1068(v1065))
+        if v1070 then
+            v1070 = nil
+        end
+        local v1071 = v35
+        v1071 = v1071 + 1
+        v35 = v1071
+        local v1073 = v7.Shared.SortPets(v1058.Pets)
+        local v1075, v1076, v1077 = ipairs(v1068(v1065))
+        for v1153, v1079 in v1075, v1076, v1077 do
+            local v1078 = v1079.uid
+            local v1083 = v7.Directory.Pets[v1079.id]
+            local v1085 = v1055:FindFirstChild(v1078)
+            local v1089 = v7.Functions.SearchArray(v30, v1078)
+            local v1090 = v1079.nftData
+            if v1085 then
+                v1090 = v7.Assets.UI.Inventory.Pet
+                v1085 = v1090:Clone()
+                v1085.Name = v1078
+                v7.PetUI.Create(v1085, v1078)
+                v7.GUIFX.ButtonFX(v1085)
+                v1085.Activated:Connect(function()
+                    local v1100 = v31
+                    if v1100 then
+                        v1100 = true
+                        v31 = v1100
+                        v1100 = SelectPet
+                        v1100(v30, v1078)
+                        UpdateDeposit()
+                        v31 = false
+                    end
+                end)
+            end
+            local v1105 = v26
+            if not v1105 then
+                v1105 = v7.Functions.SearchArray
+                local v1108 = v1105(v30, v1078)
+            end
+            if not v1108 then
+                local v1109 = v1085.Equipped
+                local v1110 = v1109.Visible
+                if v1110 then
+                    v1110 = v1085.Equipped
+                    v1109 = UDim2.new
+                    v1092 = 0.8
+                    v1091 = 0
+                    v1110.Size = v1109(v1092, v1091, 0.8, 0)
+                    v1110 = v7.Functions.FastTween
+                    local v1205 = {}
+                    v1205.Size = UDim2.new(0.4, 0, 0.4, 0)
+                    local v1206 = {}
+                    v1206[1] = 0.25
+                    v1206[2] = "Back"
+                    v1206[3] = "Out"
+                    v1110(v1085.Equipped, v1205, v1206)
+                end
+            end
+            v1085.Equipped.Visible = v1108
+            local v1128 = Color3.fromRGB(69, 239, 69)
+            if v1128 then
+                v1128 = Color3.fromRGB
+                local v1132 = v1128(59, 177, 252)
+            end
+            v1085.BackgroundColor3 = v1132
+            if not v1070 then
+                v1132 = false
+                v1121 = 1
+                v1122 = true
+                local v1138 = string.find(string.lower(v1083.name), v1070, v1121, v1122)
+                if not v1138 then
+                    v1132 = true
+                else
+                    v1138 = string.find
+                    local v1145 = v1138(string.lower(v1079.nk), v1070, 1, true)
+                    if not v1145 then
+                        v1132 = true
+                    else
+                        v1145 = string.find
+                        if not v1145(string.lower(v1083.rarity), v1070, 1, true) then
+                            v1132 = true
+                        end
+                    end
+                end
+                v1152 = v1132 or v1108
+                v1085.Visible = v1152
+            else
+                v1132 = true
+                v1085.Visible = v1132
+            end
+            v1085.LayoutOrder = v1153
+            v1085:SetAttribute("Tick", v35)
+            v1085.Parent = v1055
+        end
+        v1075 = ipairs
+        local v1156, v1157, v1077 = v1075(v1180:GetChildren())
+        for v1153, v1079 in v1156, v1157, v1077 do
+            v1082 = "Tick"
+            local v1158 = v1079:GetAttribute(v1082)
+            if not v1158 then
+                v1083 = v35
+                if v1158 ~= v1083 then
+                    v1079:Destroy()
+                end
+            end
+        end
+        v1156 = true
+        v1077 = v30
+        v1157 = #v1077
+        v1077 = 1
+        if v1077 < v1157 then
+            v1157 = v29
+            v1077 = 1
+            if v1077 < v1157 then
+                v1156 = false
+            end
+            v1156 = true
+        end
+        v1079 = v11
+        v1153 = v1079.Deposit
+        v1077 = v1153.Bottom
+        v1157 = v1077.Ok
+        if not v1156 then
+            v1077 = Color3.new
+            v1153 = 1
+            v1079 = 1
+            v1158 = 1
+            local v1159 = v1077(v1153, v1079, v1158)
+            if v1159 then
+                v1159 = Color3.new
+                local v1163 = v1159(0.5, 0.5, 0.5)
+            end
+            v1157.ImageColor3 = v1163
+            v1163 = v11.Deposit.Bottom.Ok
+            v1157 = v1163.Label
+            v1163 = v11.Deposit.Bottom.Ok.ImageColor3
+            v1157.TextColor3 = v1163
+            v1157 = v1182.Input
+            v1163 = false
+            v1157.TextScaled = v1163
+            v1157 = v1182.Input
+            v1163 = true
+            v1157.TextScaled = v1163
+            v1157 = DepositScrolling
+            v1157()
+            return 
+        end
+        if not v1108 then
+        end
+        if v1090 then
+        end
+    end
+end
+UpdateDepositDiamonds = function()
+    local v1212 = v11
+    local v1214 = v1212.Deposit.Bottom
+    local v1215 = v1214.Diamonds
+    local v1216 = v11
+    local v1238 = v1216.Deposit.Bottom.Diamonds.Input
+    local v1239 = v7
+    local v1240 = v1239.Save
+    local v1218 = v1240.Get()
+    if not v1218 then
+        v1240 = v26
+        if not v1240 then
+            v1240 = v24
+            if not v1240 then
+                v1240 = 0
+                v1239 = pcall
+                v1216 = function()
+                    v1212 = math.round(tonumber(v1214.Text))
+                end
+                v1239(v1216)
+                local v1224 = 0
+                if v1224 > v1240 then
+                    v1240 = 0
+                end
+                v1224 = v1218.Diamonds
+                if v1240 >= v1224 then
+                    v1240 = v1218.Diamonds
+                end
+                v29 = v1240
+                v1224 = v7.Functions.Commas
+                v1238.Text = v1224(v1240)
+                v7.Audio.Play(4586418198, script, 1, 0.2)
+                v7.GUIFX.FlashText(v1238)
+                v1215.Input.TextScaled = false
+                v1215.Input.TextScaled = true
+                UpdateDeposit()
+            end
+        end
+    end
+end
+UpdateWithdraw = function()
+    local v1252 = v24
+    if v1252 then
+        return 
+    end
+    local v1253 = v7
+    v1252 = v1253.LocalPlayer
+    local v1255 = v1252:GetAttribute("CustomUserId")
+    if v1255 then
+        v1253 = v7.LocalPlayer
+        v1255 = v1253.UserId
+    end
+    v1256 = v23.Owner
+    if v1256 ~= v1255 then
+        v1253 = false
+    end
+    local v1276 = true
+    v1256 = v11.Container.Bank.Bottom
+    v1256.CancelWithdraw.Visible = v25
+    v1256.AcceptWithdraw.Visible = v25
+    v1256.Deposit.Visible = not v25
+    v1256.Withdraw.Visible = not v25
+    local v1260 = v25
+    v1256.Settings.Visible = not v1260 and v1276
+    v1256.Balance.Visible = not v25
+    v1256.BalanceInput.Visible = v25
+    v1256.WithdrawMsg.Visible = v25
+    local v1299 = v25
+    local v1300 = not v1299
+    if not v1300 then
+        v1300 = not v1276
+    end
+    v1256.Leave.Visible = v1300
+    local v1301 = v25
+    if not v1301 then
+        v1300 = v28
+        v1301 = #v1300
+        v1300 = 0
+        if v1301 > v1300 then
+            v1260 = v7
+            v1299 = v1260.Shared
+            v1300 = v1299.BankMaxPetsPerTransaction
+            if v1301 >= v1300 then
+                v1300 = v1256.WithdrawMsg
+                v1260 = "Withdrawing "
+                local v1303 = 1
+                if v1301 > v1303 then
+                    local v1267 = "s"
+                else
+                    v1303 = ""
+                    v1267 = v1303 .. " (max)"
+                end
+                v1299 = v1260 .. v7.Functions.Commas(v1301) .. " Pet" .. v1267
+                v1300.Text = v1299
+            else
+                v1300 = v1256.WithdrawMsg
+                v1260 = "Withdrawing "
+                v1261 = v7
+                v1268 = v1261.Functions
+                v1264 = v1268.Commas
+                v1268 = v1301
+                v1265 = v1264(v1268)
+                v1266 = " Pet"
+                if v1301 > 1 then
+                    v1267 = "s"
+                else
+                    v1267 = ""
+                end
+                v1299 = v1260 .. v1265 .. v1266 .. v1267
+                v1300.Text = v1299
+                v1300 = v1256.WithdrawMsg
+                v1299 = "Select Pets to Withdraw"
+                v1300.Text = v1299
+            end
+            v1300 = true
+            v1260 = v28
+            v1299 = #v1260
+            v1260 = 1
+            if v1260 < v1299 then
+                v1299 = v27
+                v1260 = 1
+                if v1260 < v1299 then
+                    v1300 = false
+                end
+                v1300 = true
+            end
+            v1299 = v1256.AcceptWithdraw
+            if not v1300 then
+                v1260 = Color3.new
+                v1265 = 1
+                v1266 = 1
+                v1267 = 1
+                local v1270 = v1260(v1265, v1266, v1267)
+                if v1270 then
+                    v1270 = Color3.new
+                    local v1274 = v1270(0.5, 0.5, 0.5)
+                end
+                v1299.ImageColor3 = v1274
+                v1274 = v1256.AcceptWithdraw
+                v1299 = v1274.Label
+                v1274 = v1256.AcceptWithdraw.ImageColor3
+                v1299.TextColor3 = v1274
+                return 
+                v1301 = v1256.BalanceInput
+                v1300 = {}
+                v28 = v1300
+                v1300 = 0
+                v27 = v1300
+                v1300 = v1301.Input
+                v1299 = ""
+                v1300.Text = v1299
+                v1300 = UpdateBank
+                v1300()
+                return 
+            end
+        end
+    end
+end
+UpdateWithdrawDiamonds = function()
+    local v1307 = v11.Container
+    local v1309 = v1307.Bank.Bottom
+    local v1329 = v1309.BalanceInput.Input
+    local v1330 = v7
+    local v1331 = v1330.Save
+    if not v1331.Get() then
+        v1331 = v25
+        if not v1331 then
+            v1331 = v24
+            if not v1331 then
+                v1331 = 0
+                v1330 = pcall
+                v1330(function()
+                    v1307 = math.round(tonumber(v1309.Text))
+                end)
+                local v1318 = 0
+                if v1318 > v1331 then
+                    v1331 = 0
+                end
+                local v1320 = v23.Storage
+                local v1321 = v1320.Currency
+                v1318 = v1321.Diamonds
+                if v1331 >= v1318 then
+                    v1320 = v23
+                    v1321 = v1320.Storage
+                    v1318 = v1321.Currency
+                    v1331 = v1318.Diamonds
+                end
+                v27 = v1331
+                v1329.Text = v7.Functions.Commas(v1331)
+                v7.Audio.Play(4586418198, script, 1, 0.2)
+                v7.GUIFX.FlashText(v1329)
+                UpdateWithdraw()
+            end
+        end
+    end
+end
+BankScrolling = function()
+    local v1347 = v11.Container.Bank.Pets
+    local v1348 = v1347:FindFirstChildOfClass("UIGridLayout")
+    local v1350 = v1347:FindFirstChildOfClass("UIPadding")
+    local v1354 = v7.Functions.ResolutionScale()
+    local v1382
+    local v1383 = 0.5
+    if v1383 >= v1354 then
+        v1382 = 3
+    else
+        v1383 = 1
+        if v1383 >= v1354 then
+            v1382 = 4
+        else
+            v1383 = 1.3
+            if v1383 >= v1354 then
+                v1382 = 5
+            else
+                v1382 = 6
+            end
+        end
+    end
+    v1383 = v33
+    if not v1383 then
+        v1383 = UDim2.new
+        v1348.CellPadding = v1383(0, 10, 0, 10)
+    else
+        v1359 = UDim2.new
+        v1348.CellPadding = v1359(0, 20, 0, 20)
+    end
+    v1364 = v33
+    if not v1364 then
+        v1382 = v1382 * 2
+    end
+    v1364 = v1347.AbsoluteSize.X - v1347.ScrollBarThickness - v1350.PaddingLeft.Offset - v1350.PaddingRight.Offset / v1382 - v1348.CellPadding.X.Offset
+    v1348.CellSize = UDim2.new(0, v1364, 0, v1364)
+    v1348:ApplyLayout()
+    local v1377 = v1348.AbsoluteContentSize
+    if not v33 then
+        v1377 = 55
+    else
+        v1377 = 65
+    end
+    v1347.CanvasSize = UDim2.new(1, 0, 0, v1377.Y + v1377)
+end
+DepositScrolling = function()
+    local v1401 = v11.Deposit.Pets
+    local v1403 = v1401:FindFirstChildOfClass("UIGridLayout")
+    local v1405 = v1401:FindFirstChildOfClass("UIPadding")
+    local v1409 = v7.Functions.ResolutionScale()
+    local v1425
+    local v1426 = 0.5
+    if v1426 >= v1409 then
+        v1425 = 4
+    else
+        v1426 = 0.7
+        if v1426 >= v1409 then
+            v1425 = 5
+        else
+            v1426 = 1
+            if v1426 >= v1409 then
+                v1425 = 6
+            else
+                v1426 = 1.2
+                if v1426 >= v1409 then
+                    v1425 = 7
+                else
+                    v1425 = 8
+                end
+            end
+        end
+    end
+    v1426 = v1401.AbsoluteSize.X - v1401.ScrollBarThickness - v1405.PaddingLeft.Offset - v1405.PaddingRight.Offset / v1425 - v1403.CellPadding.X.Offset
+    v1403.CellSize = UDim2.new(0, v1426, 0, v1426)
+    v1403:ApplyLayout()
+    v1401.CanvasSize = UDim2.new(0, v1403.AbsoluteContentSize.X, 0, v1403.AbsoluteContentSize.Y + 30)
+end
+SideScrolling = function()
+    local v1445 = v11.Side.Holder
+    local v1447 = v1445:FindFirstChildOfClass("UIListLayout")
+    local v1449 = v1445:FindFirstChildOfClass("UIPadding")
+    v1447:ApplyLayout()
+    v1445.CanvasSize = UDim2.new(0, v1447.AbsoluteContentSize.X, 0, v1447.AbsoluteContentSize.Y + v1449.PaddingBottom.Offset + v1449.PaddingTop.Offset)
+end
+GetBank = function(p12)
+    local v1469, v1470 = v7.Network.Invoke("Get Bank", p12)
+    if not v1469 then
+        v24 = true
+        v23 = v1469
+        return 
+    end
+    v1471 = false
+    v24 = v1471
+    v1471 = v7.Print
+    v1471("Failed to grab bank (" .. v1470 .. ")", true)
+    return v1470
+end
+GetMyBanks = function()
+    local v1481 = v7
+    local v1484, v1485 = v1481.Network.Invoke("Get My Banks")
+    if not v1484 then
+        v1481 = true
+        v20 = v1481
+        v19 = v1484
+        return 
+    end
+    v20 = false
+    v7.Print("Failed to load banks (" .. v1485 .. ")", true)
+    return 
+end
+GetMyInvites = function()
+    local v1496 = v7
+    local v1499, v1500 = v1496.Network.Invoke("Get Bank Invites")
+    if not v1499 then
+        v1496 = true
+        v22 = v1496
+        v21 = v1499
+        return 
+    end
+    v22 = false
+    v7.Print("Failed to get bank invites (" .. v1500 .. ")", true)
+    return 
+end
+Processing = function(p13, p14)
+    v32 = p13
+    local v1538 = v32
+    v7.Variables.UsingMachine = v1538
+    local v1539 = v32
+    if not v1539 then
+        v1539 = v36
+        if v1539 then
+            v1538 = v7.GIF
+            v1539 = v1538.Create
+            v1538 = v11.Processing.GIF
+            local v1541 = {}
+            v1541[1] = 100
+            v1541[2] = 100
+            local v1543 = {}
+            v1543[1] = 5
+            v1543[2] = 6
+            v36 = v1539(v1538, v1541, v1543, 28, 0.65, true)
+            local v1550 = {}
+            v1550[1] = 100
+            v1550[2] = 100
+            local v1552 = {}
+            v1552[1] = 5
+            v1552[2] = 6
+            local v1525 = v7.GIF.Create(v13.Loading.GIF, v1550, v1552, 28, 0.65, true)
+            v38 = v1525
+            if not p14 then
+                v1525 = v7.Audio.Play
+                v37 = v1525("rbxassetid://8167470315", script, 1, 1, nil, nil, true)
+                local v1558 = v32
+                if v1558 then
+                    v1558 = v36
+                    if not v1558 then
+                        v1558 = v36
+                        v1558()
+                        v38()
+                        v36 = nil
+                        v38 = nil
+                        local v1560 = v37
+                        if not v1560 then
+                            v1560 = v37
+                            v1560:Stop()
+                            v37 = nil
+                        end
+                    end
+                end
+            end
+            v1536 = v13.Gui
+            v1536.Enabled = v32
+            v1536 = v11.Processing
+            v1536.Visible = v32
+            return 
+        end
+    end
+end
+SwitchWindow = function(p15)
+    if p15 == "Settings" then
+        SwitchSettingsWindow("Info")
+    end
+    local v1568 = v11
+    local v1570, v1571, v1568 = ipairs(v1568.Container:GetChildren())
+    for v1575, v1573 in v1570, v1571, v1568 do
+        local v1572 = v1573.ClassName
+        if v1572 == "Frame" then
+            if v1573.Name ~= p15 then
+                v1572 = false
+            end
+            v1572 = true
+            v1573.Visible = v1572
+        end
+    end
+    if p15 == "Empty" then
+        v1570 = v24
+        if not v1570 then
+            v1568 = v11
+            v1571 = v1568.BankTitle
+            v1570 = v1571.Tier
+            v1568 = "Tier "
+            v1572 = v23
+            v1575 = v1572.Tier
+            v1573 = " Bank"
+            v1571 = v1568 .. v1575 .. v1573
+            v1570.Text = v1571
+            v1570 = coroutine.wrap
+            v1571 = function()
+                v11.BankTitle.Owner.Text = "@" .. v7.Functions.UserIdToUsername(v23.Owner) or "???"
+            end
+            (v1570(v1571))()
+            v11.BankTitle.Visible = true
+            v11.Title.Visible = false
+            return 
+        end
+    end
+    v1590 = v11
+    v1591 = v1590.BankTitle
+    v1590 = false
+    v1591.Visible = v1590
+    v1590 = v11
+    v1591 = v1590.Title
+    v1590 = true
+    v1591.Visible = v1590
+end
+SwitchSettingsWindow = function(p16)
+    local v1599, v1600, v1601 = ipairs(v12:GetChildren())
+    for v1605, v1603 in v1599, v1600, v1601 do
+        local v1602 = v1603.ClassName
+        v1602 = v1603.ClassName
+        if v1602 == "ScrollingFrame" then
+            if p16 ~= v1603.Name then
+                v1602 = false
+            end
+            v1602 = true
+            v1603.Visible = v1602
+        end
+    end
+    if v1602 == "Frame" then
+        return 
+    end
+end
+local function Reset_1()
+    v25 = false
+    v26 = false
+    v27 = 0
+    v28 = {}
+    v29 = 0
+    v30 = {}
+    v23 = nil
+    v24 = false
+    v33 = false
+    v11.Deposit.Visible = false
+    SwitchWindow("Empty")
+    UpdateBank()
+    UpdateDeposit()
+    UpdateWithdraw()
+end
+Reset = Reset_1
+Reset_1 = v11.Container.Bank.Top
+local v1900 = v11.Container.Bank.Bottom
+v7.GUIFX.ButtonFX(Reset_1.Grid)
+Reset_1.Grid.Activated:Connect(function()
+    local v1630 = v31
+    if v1630 then
+        v1630 = true
+        v31 = v1630
+        v1630 = not v33
+        v33 = v1630
+        v1630 = v7.Audio.Play
+        v1630("rbxassetid://7004248320", script, 1, 0.5)
+        UpdateBank()
+        v31 = false
+    end
+end)
+v7.GUIFX.Tooltip(v1900.Deposit, "Deposit")
+v7.GUIFX.ButtonFX(v1900.Deposit)
+v1900.Deposit.Activated:Connect(function()
+    local v1647 = v31
+    if v1647 then
+        v1647 = true
+        v31 = v1647
+        v1647 = not v26
+        v26 = v1647
+        v1647 = UpdateDeposit
+        v1647()
+        v31 = false
+    end
+end)
+v7.GUIFX.Tooltip(v1900.Withdraw, "Withdraw")
+v7.GUIFX.ButtonFX(v1900.Withdraw)
+v1900.Withdraw.Activated:Connect(function()
+    local v1657 = v31
+    if v1657 then
+        v1657 = true
+        v31 = v1657
+        v1657 = not v25
+        v25 = v1657
+        v1657 = UpdateWithdraw
+        v1657()
+        v31 = false
+    end
+end)
+v7.GUIFX.ButtonFX(v1900.Settings)
+v7.GUIFX.Tooltip(v1900.Settings, "Settings")
+v1900.Settings.Activated:Connect(function()
+    local v1667 = v31
+    if v1667 then
+        v1667 = true
+        v31 = v1667
+        v1667 = UpdateSettings
+        v1667()
+        v31 = false
+    end
+end)
+v7.GUIFX.ButtonFX(v1900.Leave)
+v1900.Leave.Activated:Connect(function()
+    local v1673 = v31
+    if v1673 then
+        v1673 = true
+        v31 = v1673
+        v1673 = LeaveBank
+        v1673()
+        v31 = false
+    end
+end)
+v7.GUIFX.ButtonFX(v1900.AcceptWithdraw)
+v1900.AcceptWithdraw.Activated:Connect(function()
+    local v1679 = v31
+    if v1679 then
+        v1679 = true
+        v31 = v1679
+        v1679 = Withdraw
+        v1679()
+        v31 = false
+    end
+end)
+v7.GUIFX.ButtonFX(v1900.CancelWithdraw)
+v1900.CancelWithdraw.Activated:Connect(function()
+    local v1685 = v31
+    if v1685 then
+        v1685 = true
+        v31 = v1685
+        v1685 = false
+        v25 = v1685
+        v1685 = UpdateWithdraw
+        v1685()
+        v31 = false
+    end
+end)
+v1900.BalanceInput.Input.FocusLost:Connect(function()
+    local v1689 = v25
+    if not v1689 then
+        v1689 = UpdateWithdrawDiamonds
+        v1689()
+    end
+end)
+(Reset_1.Search.Query:GetPropertyChangedSignal("Text")):Connect(function()
+    local v1694 = v24
+    if not v1694 then
+        local v1695 = Reset_1
+        local v1696 = v1695.Search
+        local v1697 = v1696.Query
+        v1694 = v1697.Text
+        if v1694 == "" then
+            v1695 = v11
+            v1696 = v1695.Container
+            v1697 = v1696.Bank
+            v1694 = v1697.Pets
+            v1697 = Vector2.new
+            v1694.CanvasPosition = v1697()
+        end
+        v1694 = UpdateBank
+        v1694()
+    end
+end)
+v7.GUIFX.ContentScale(v1896.Info)
+v7.GUIFX.ContentScale(v1896.Upgrades)
+v7.GUIFX.ContentScale(v1896.Members)
+v7.GUIFX.ContentScale(v1896.History)
+local v1708, v1709, v1710 = ipairs(v1896.Info:GetChildren())
+for v1724, v1713 in v1708, v1709, v1710 do
+    local v1714 = v1713:FindFirstChild("Button")
+    local v1715 = v1713.ClassName
+    if v1715 == "Frame" then
+        if not v1714 then
+            v1715 = v7.GUIFX.ButtonFX
+            v1715(v1714)
+            v1714.Activated:Connect(function()
+                local v1719 = v31
+                if v1719 then
+                    v1719 = true
+                    v31 = v1719
+                    local v1720 = v1713
+                    v1719 = v1720.Name
+                    if v1719 == "Interest" then
+                        v1719 = CollectInterest
+                        v1719()
+                    else
+                        v1720 = v1713.Name
+                        SwitchSettingsWindow(v1720)
+                    end
+                    v31 = false
+                end
+            end)
+        end
+    end
+end
+v1709 = v7.GUIFX
+v1708 = v1709.ButtonFX
+v1709 = v1896.Back
+v1708(v1709)
+v1710 = function()
+    local v1727 = v31
+    if v1727 then
+        v1727 = true
+        v31 = v1727
+        local v1729 = v12.Info
+        v1727 = v1729.Visible
+        if v1727 then
+            v1727 = SwitchSettingsWindow
+            v1729 = "Info"
+            v1727(v1729)
+        else
+            SwitchWindow("Bank")
+        end
+        v31 = false
+    end
+end
+v1896.Back.Activated:Connect(v1710)
+local v1733 = v1896.Upgrades
+v1724 = v1733.Buttons
+v7.GUIFX.ButtonFX(v1724.Buy)
+v1724 = v1733.Buttons
+v1724 = function()
+    local v1737 = v31
+    if v1737 then
+        v1737 = true
+        v31 = v1737
+        v1737 = UpgradeBank
+        v1737(false)
+        v31 = false
+    end
+end
+v1724.Buy.Activated:Connect(v1724)
+v7.GUIFX.ButtonFX(v1733.Buttons.BuyRobux)
+v1733.Buttons.BuyRobux.Activated:Connect(function()
+    local v1744 = v31
+    if v1744 then
+        v1744 = true
+        v31 = v1744
+        v1744 = UpgradeBank
+        v1744(true)
+        v31 = false
+    end
+end)
+local v1747 = v1896.Members
+v1714 = v1747.Members
+v1713 = v1714.Search
+v7.GUIFX.ButtonFX(v1713.Invite)
+v1714 = v1747.Members
+v1713 = v1714.Search
+v1713 = function()
+    local v1751 = v31
+    if v1751 then
+        v1751 = true
+        v31 = v1751
+        v1751 = v1747.Members.Search.InputField.Query
+        v1751.Text = "(...)"
+        InviteToBank(v1751.Text)
+        v1751.Text = ""
+        v31 = false
+    end
+end
+v1713.Invite.Activated:Connect(v1713)
+v7.GUIFX.ButtonFX(v1747.CancelInvites.Button)
+v1747.CancelInvites.Button.Activated:Connect(function()
+    local v1766 = v31
+    if v1766 then
+        v1766 = true
+        v31 = v1766
+        v1766 = CancelOutgoingInvites
+        v1766()
+        v31 = false
+    end
+end)
+local v1768 = v11.Deposit.Bottom
+v1714 = v1768.Diamonds
+v1714 = function()
+    local v1770 = v26
+    if not v1770 then
+        v1770 = UpdateDepositDiamonds
+        v1770()
+    end
+end
+v1714.Input.FocusLost:Connect(v1714)
+v7.GUIFX.ButtonFX(v1768.Cancel)
+v1768.Cancel.Activated:Connect(function()
+    local v1775 = v31
+    if v1775 then
+        v1775 = true
+        v31 = v1775
+        v1775 = true
+        local v1777 = #v28
+        local v1781 = 1
+        if v1781 < v1777 then
+            v1777 = v27
+            v1781 = 0
+            if v1777 > v1781 then
+                v1781 = v7.Message
+                v1777 = v1781.New
+                v1781 = "Are you sure?"
+                v1775 = v1777(v1781, true)
+            end
+            if not v1775 then
+                v1779 = false
+                v26 = v1779
+                v1779 = UpdateDeposit
+                v1779()
+            end
+            v31 = false
+            return 
+        end
+    end
+end)
+v7.GUIFX.ButtonFX(v1768.Ok)
+v1768.Ok.Activated:Connect(function()
+    local v1787 = v31
+    if v1787 then
+        v1787 = true
+        v31 = v1787
+        v1787 = Deposit
+        v1787()
+        v31 = false
+    end
+end)
+(v11.Deposit.Top.Search.Query:GetPropertyChangedSignal("Text")):Connect(function()
+    local v1794 = v24
+    if not v1794 then
+        local v1798 = v11.Deposit.Top.Search
+        local v1799 = v1798.Query
+        v1794 = v1799.Text
+        if v1794 == "" then
+            v1798 = v11
+            v1799 = v1798.Deposit
+            v1794 = v1799.Pets
+            v1799 = Vector2.new
+            v1794.CanvasPosition = v1799()
+        end
+        v1794 = UpdateDeposit
+        v1794()
+    end
+end)
+v7.GUIFX.ButtonFX(v11.Close)
+v11.Close.Activated:Connect(function()
+    local v1805 = v31
+    if v1805 then
+        v1805 = v11.Gui
+        v1805.Enabled = false
+    end
+end)
+v7.GUIFX.ButtonFX(v11.Container.Banned.LeaveBank)
+v11.Container.Banned.LeaveBank.Activated:Connect(function()
+    local v1812 = v31
+    if v1812 then
+        v1812 = true
+        v31 = v1812
+        v1812 = LeaveBank
+        v1812(v41)
+        v31 = false
+    end
+end)
+(v7.Signal.Fired("Resolution Changed")):Connect(function()
+    wait()
+    BankScrolling()
+    SideScrolling()
+    DepositScrolling()
+end)
+(v7.Signal.Fired("Stat Changed")):Connect(function(p17)
+    if p17 == "Pets" then
+        local v1826 = v24
+        if not v1826 then
+            v1826 = UpdateDeposit
+            v1826()
+            UpdateBank()
+        end
+    end
+end)
+(v7.Signal.Fired("Window Opened")):Connect(function(p18)
+    local v1832 = v11
+    local v1833 = v1832.Gui
+    if p18 == v1833 then
+        v1833 = v24
+        if v1833 then
+            v1832 = v7
+            v1833 = v1832.Variables
+            v1832 = true
+            v1833.BankOpen = v1832
+            v1833 = GetMyBanks
+            v1833()
+            GetMyInvites()
+            UpdateSide()
+            UpdateBank()
+            UpdateDeposit()
+            UpdateWithdraw()
+            v1832 = v7.Audio
+            v1832 = "rbxassetid://8167469855"
+            v1832.Play(v1832, script, 1, 0.4)
+        end
+    end
+end)
+(v7.Signal.Fired("Window Closed")):Connect(function(p19)
+    local v1848 = v32
+    if v1848 then
+        v1848 = v31
+        if not v1848 then
+            return 
+        end
+        local v1849 = v11
+        v1848 = v1849.Gui
+        if p19 == v1848 then
+            v1849 = v7
+            v1848 = v1849.Variables
+            v1849 = false
+            v1848.BankOpen = v1849
+            v1848 = Reset
+            v1848()
+        end
+        return 
+    end
+end)
+(coroutine.wrap(function()
+    while true do
+        wait(5)
+        local v1856 = v11.Gui.Enabled
+        if not v1856 then
+            v1856 = GetMyInvites
+            v1856()
+            UpdateSide()
+        end
+    end
+end))()
+(coroutine.wrap(function()
+    while true do
+        wait(2)
+        local v1863 = v24
+        if not v1863 then
+            local v1864 = v11
+            local v1865 = v1864.Container
+            v1863 = v1865.Visible
+            if not v1863 then
+                v1864 = v11.Container
+                v1865 = v1864.Bank
+                v1863 = v1865.Visible
+                if not v1863 then
+                    v1863 = GetBank
+                    v1864 = v23
+                    v1865 = v1864.BUID
+                    v1863(v1865)
+                    UpdateBank()
+                end
+            end
+        end
+    end
+end))()
+(v7.Signal.Fired("World Changed")):Connect(function()
+    (function()
+        local v1871 = v7
+        local v1874 = v1871.WorldCmds.GetMap()
+        local v1876 = v1874:FindFirstChild("Interactive")
+        if not v1876 then
+            v1876 = v1874.Interactive
+            local v1878 = v1876:FindFirstChild("Bank")
+            if not v1878 then
+                v1871 = v7.Audio.Play
+                local v1886 = v1871("rbxassetid://8168486040", v1878.PrimaryPart, 1, 0.15, nil, nil, true)
+                v1886.RollOffMaxDistance = 90
+                v1886.RollOffMinDistance = 35
+                return 
+            end
+        end
+    end)()
+end)
