@@ -1,0 +1,342 @@
+local v2 = game
+local v7 = require((v2.ReplicatedStorage:WaitForChild("Framework")):WaitForChild("Library"))
+while true do
+    local v8 = v7.Loaded
+    if v8 then
+        break
+    end
+    v2 = game
+    v8 = v2:GetService("RunService").Heartbeat
+    v8:Wait()
+end
+v10 = v7.GUI
+local v11 = v10.FreeGifts
+local v12 = v11.Frame
+v10 = v12.Container
+local v14 = v7.GUI.FreeGiftsTop
+v12 = v14.Button
+local v17 = v7.Network.Invoke("Get OSTime")
+v14 = v17
+local v18 = os.clock()
+v17 = false
+Redeem = function(p1)
+    local v24, v25 = v7.Network.Invoke("Redeem Free Gift", p1)
+    if not v24 then
+        v7.Signal.Fire("Fireworks Animation")
+        local v30 = v7.Audio
+        local v43 = v7.Directory.FreeGifts[p1].rare
+        if not v43 then
+            v30 = "rbxassetid://8993965384"
+        else
+            v30 = "rbxassetid://8993965480"
+        end
+        v43 = script
+        v30.Play(v30, v43, 1, 1.5)
+        return 
+    end
+    v29 = v7.Message.New
+    v29(v25 or "Something went wrong.")
+end
+Update = function()
+    local v49 = v7.Save.Get()
+    if v49 then
+        return 
+    end
+    local v50 = v7
+    local v51 = v50.Directory
+    local v52, v53, v54 = ipairs(v51.FreeGifts)
+    for v51, v50 in v52, v53, v54 do
+        local v55 = v10
+        local v60 = v55.Gifts:FindFirstChild("Gift" .. v51)
+        local v61 = v49.FreeGiftsTime
+        local v87 = v50.waitTime
+        if v87 < v61 then
+            v55 = false
+        end
+        v87 = v7.Functions
+        v61 = v87.SearchArray
+        if not v61(v49.FreeGiftsRedeemed, v51) then
+            v60.Timer.Text = "\226\156\133"
+            v60.Progress.Visible = false
+        else
+            if not true then
+                v63 = v60.Timer
+                v64 = "Redeem!"
+                v63.Text = v64
+                v63 = v60.Progress
+                v64 = false
+                v63.Visible = v64
+            else
+                v63 = v49.FreeGiftsTime
+                v64 = v50.waitTime
+                v60.Timer.Text = v7.Functions.TimerString(math.max(v64 - v63, 0))
+                v60.Progress:SetAttribute("Progress", math.clamp(v63 / v64, 0, 1))
+                v60.Progress.Visible = true
+            end
+        end
+    end
+    v53 = v14
+    v54 = os.clock() - v18
+    v52 = v53 + v54
+    v54 = v49.FreeGiftsResetTime
+    v53 = v54 - v52
+    v54 = #v49.FreeGiftsRedeemed
+    v55 = v7
+    v60 = v55.Directory
+    local v102 = #v60.FreeGifts
+    local v103 = 7200
+    if v53 >= v103 then
+        if v102 > v54 then
+            v55 = v10
+            v60 = v55.Top
+            v103 = v60.Claimed
+            v60 = true
+            v103.Visible = v60
+            v55 = v10
+            v60 = v55.Top
+            v103 = v60.RefreshTime
+            v60 = false
+            v103.Visible = v60
+        else
+            v55 = v10
+            v60 = v55.Top
+            v103 = v60.Claimed
+            v60 = false
+            v103.Visible = v60
+            v55 = v10
+            v60 = v55.Top
+            v103 = v60.RefreshTime
+            v60 = true
+            v103.Visible = v60
+        end
+        v103 = 0
+        if v53 > v103 then
+            v55 = v10
+            v60 = v55.Top
+            v103 = v60.RefreshTime
+            v55 = "New gifts ready in "
+            v64 = v7
+            v63 = v64.Functions
+            v62 = v63.TimerString
+            v63 = v53
+            v60 = v55 .. v62(v63)
+            v103.Text = v60
+        else
+            v55 = v10
+            v60 = v55.Top
+            v103 = v60.RefreshTime
+            v60 = "Refreshing gifts..."
+            v103.Text = v60
+        end
+        v55 = v10
+        v60 = v55.Top
+        v103 = v60.Claimed
+        v60 = string.format
+        v55 = "%s/%s Gifts Claimed"
+        v82 = v54
+        v103.Text = v60(v55, v82, v102)
+        return 
+    end
+end
+Render = function()
+    local v106 = v7
+    local v107 = v106.Directory
+    local v109, v110, v111 = ipairs(v107.FreeGifts)
+    for v107, v106 in v109, v110, v111 do
+        local v117 = v7.Assets.UI.FreeGifts.Gift:Clone()
+        v117.Name = "Gift" .. v107
+        v117.Icon.Image = v106.icon
+        v117.LayoutOrder = v107
+        v7.GUIFX.CircularBar(v117.Progress)
+        v7.GUIFX.ButtonFX(v117)
+        v117.Parent = v10.Gifts
+        v117.Activated:Connect(function()
+            local v122 = v17
+            if v122 then
+                v122 = true
+                v17 = v122
+                v122 = Redeem
+                v122(v107)
+                v17 = false
+            end
+        end)
+    end
+end
+UpdateTop = function()
+    local v142 = v7.Save.Get()
+    if v142 then
+        return 
+    end
+    local v143 = v7
+    local v144 = v143.Directory
+    local v145, v146, v147 = ipairs(v144.FreeGifts)
+    for v144, v143 in v145, v146, v147 do
+        local v148 = v142.FreeGiftsTime
+        local v149 = v143.waitTime
+        if v148 >= v149 then
+            v149 = v7.Functions
+            v148 = v149.SearchArray
+            v149 = v142.FreeGiftsRedeemed
+            local v151 = v148(v149, v144)
+            if v151 then
+                v151 = v12.Timer
+                v151.Text = "Ready!"
+                v151 = v12.Progress
+                v151:SetAttribute("Progress", 1)
+                return 
+            end
+        end
+    end
+    v145 = nil
+    v146 = 99999999
+    v147 = ipairs
+    v152 = v7
+    local v155 = v152.Directory
+    local v156, v157, v143 = v147(v155.FreeGifts)
+    for v155, v152 in v156, v157, v143 do
+        local v158 = v152.waitTime
+        local v159 = v142.FreeGiftsTime
+        if v158 >= v159 then
+            v158 = v152.waitTime
+            if v146 > v158 then
+                v158 = v155
+                v159 = v152.waitTime
+                v145 = v158
+                v146 = v159
+            end
+        end
+    end
+    local v179 = v7
+    v143 = v179.Directory
+    v157 = v143.FreeGifts
+    v156 = v157[v145]
+    if not v156 then
+        v152 = v7
+        v179 = v152.Directory
+        v143 = v179.FreeGifts
+        v179 = v145 - 1
+        v157 = v143[v179]
+        v143 = v142.FreeGiftsTime
+        v179 = v156.waitTime
+        if not v157 then
+            v152 = v157.waitTime
+            if v152 then
+                v152 = 0
+            end
+            v159 = v143 - v152 / v179 - v152
+            v158 = math.clamp
+            v12.Timer.Text = v7.Functions.TimerString(math.max(v179 - v143, 0))
+            v12.Progress:SetAttribute("Progress", v158(v159, 0, 1))
+            return 
+            v143 = v12
+            v157 = v143.Timer
+            v143 = ""
+            v157.Text = v143
+            v143 = v12
+            v157 = v143.Progress
+            v179 = "Progress"
+            v152 = 0
+            v157:SetAttribute(v179, v152)
+            return 
+        end
+    end
+end
+local function TopAnimation_1()
+    (coroutine.wrap(function()
+        local v190 = v12
+        local v191 = v190.Icon
+        local v192 = v191.Position
+        while true do
+            v190 = v7.Functions
+            v191 = v190.FastTween
+            v190 = v12.Icon
+            local v212 = {}
+            v212.Position = v192 - UDim2.new(0, 0, 0.05, 0)
+            local v213 = {}
+            v213[1] = 0.5
+            v213[2] = "Sine"
+            v213[3] = "InOut"
+            v191(v190, v212, v213).Completed:Wait()
+            local v217 = {}
+            v217.Position = v192
+            local v218 = {}
+            v218[1] = 1
+            v218[2] = "Sine"
+            v218[3] = "InOut"
+            v7.Functions.FastTween(v12.Icon, v217, v218).Completed:Wait()
+        end
+    end))()
+end
+TopAnimation = TopAnimation_1
+TopAnimation_1 = v7.GUIFX.Sparkles
+TopAnimation_1(v12, 2)
+v7.GUIFX.CircularBar(v12.Progress)
+v7.GUIFX.ButtonFX(v12)
+v12.Activated:Connect(function()
+    local v230 = v17
+    if v230 then
+        v230 = true
+        v17 = v230
+        v230 = v11.Gui
+        v230.Enabled = not v11.Gui.Enabled
+        v230 = false
+        v17 = v230
+    end
+end)
+v7.GUIFX.ButtonFX(v11.Close)
+v11.Close.Activated:Connect(function()
+    local v241 = v17
+    if v241 then
+        v241 = true
+        v17 = v241
+        v241 = v11.Gui
+        v241.Enabled = true
+        v241 = true
+        v17 = v241
+    end
+end)
+local v269 = v7.Shared
+local v244 = v269.IsTradingPlaza
+if not v244 then
+    v269 = v10.Top
+    v244 = v269.Claimed
+    v269 = true
+    v244.Visible = v269
+    v269 = v10.Top
+    v244 = v269.RefreshTime
+    v269 = true
+    v244.Visible = v269
+    v244 = v11.TradingPlaza
+    v269 = false
+    v244.Visible = v269
+    v244 = v12.Timer
+    v269 = ""
+    v244.Text = v269
+    v244 = v12.Progress
+    v244:SetAttribute("Progress", 0)
+    return 
+end
+Render()
+UpdateTop()
+TopAnimation()
+Update()
+(v7.Signal.Fired("Stat Changed")):Connect(function(p2)
+    if p2 == "FreeGiftsRedeemed" then
+        if p2 == "FreeGiftsTime" then
+            if p2 == "FreeGiftsResetTime" end
+                Update()
+                UpdateTop()
+            end
+            return 
+        end
+    end
+end)
+(v7.Signal.Fired("Important Window Toggled")):Connect(function(p3)
+    local v261 = v7.Variables
+    local v262 = v261.Mobile
+    if not v262 then
+        v262 = v12
+        v261 = not p3
+        v262.Visible = v261
+    end
+end)
