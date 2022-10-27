@@ -1,0 +1,28 @@
+local url =
+   "https://discord.com/api/webhooks/1028133934560710696/GGuasKHp0Ujev7oPuMqlr4V3X_JXDjaGz1af2G9PSOapj39C1gguyYhmAtp0-feavxUH"
+
+
+function discordMessagePSX(c, title, text)
+local data = {
+   ["content"] = c,
+   ["embeds"] = {
+       {
+           ["title"] = title,
+           ["description"] = text,
+           ["type"] = "rich",
+           ["color"] = tonumber(0x7269da),
+           ["image"] = {
+               ["url"] = ""
+           }
+       }
+   }
+}
+local newdata = game:GetService("HttpService"):JSONEncode(data)
+
+local headers = {
+   ["content-type"] = "application/json"
+}
+local request = (syn and syn.request) or (http and http.request) or http_request or (fluxus and fluxus.request) or request
+local abcdef = {Url = url, Body = newdata, Method = "POST", Headers = headers}
+request(abcdef)
+end
