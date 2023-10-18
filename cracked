@@ -1,10 +1,10 @@
-    local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+  local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
             local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
             local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
             
             local Window = Fluent:CreateWindow({
                 Title = "Bit Hub",
-                SubTitle = "Cracked",
+                SubTitle = "Premium",
                 TabWidth = 160,
                 Size = UDim2.fromOffset(580, 390),
                 Acrylic = false, -- The blur may be detectable, setting this to false disables blur entirely
@@ -1759,7 +1759,10 @@
             
             Fluent:Notify({
                 Title = "Fluent",
-                Content = "bit hub has been crack.",
+                Content = "The script has been loaded.",
                 Duration = 8
             })
             
+            -- You can use the SaveManager:LoadAutoloadConfig() to load a config
+            -- which has been marked to be one that auto loads!
+            SaveManager:LoadAutoloadConfig()
