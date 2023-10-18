@@ -4,7 +4,7 @@
             
             local Window = Fluent:CreateWindow({
                 Title = "Bit Hub",
-                SubTitle = "Premium",
+                SubTitle = "Cracked",
                 TabWidth = 160,
                 Size = UDim2.fromOffset(580, 390),
                 Acrylic = false, -- The blur may be detectable, setting this to false disables blur entirely
@@ -1763,6 +1763,12 @@
                 Duration = 8
             })
             
-            -- You can use the SaveManager:LoadAutoloadConfig() to load a config
-            -- which has been marked to be one that auto loads!
-            SaveManager:LoadAutoloadConfig()
+  local NotificationHolder = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Module.Lua"))()
+  local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Client.Lua"))()
+  
+  Notification:Notify(
+    {Title = " Get Cracked noob", Description = "By: putter press c Idoit"},
+    {OutlineColor = Color3.fromRGB(80, 80, 80), Time = 5, Type = "option"},
+    {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84), Callback = function(State) print(tostring(State)) end}
+  )
+end
