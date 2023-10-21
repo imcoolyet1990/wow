@@ -206,19 +206,19 @@ local frame = Instance.new("Frame")
   
   button.MouseButton1Click:Connect(toggle)
   
-  -- Adicionar keybind "F" para ativar o botão
+  -- Adicionar keybind "x" para ativar o botão
   local UserInputService = game:GetService("UserInputService")
   local eKeyPressed = false
   
   UserInputService.InputBegan:Connect(function(input, gameProcessedEvent)
-    if input.KeyCode == Enum.KeyCode.F and not gameProcessedEvent then
+    if input.KeyCode == Enum.KeyCode.X and not gameProcessedEvent then
       eKeyPressed = true
       toggle()
     end
   end)
   
   UserInputService.InputEnded:Connect(function(input, gameProcessedEvent)
-    if input.KeyCode == Enum.KeyCode.F then
+    if input.KeyCode == Enum.KeyCode.X then
       eKeyPressed = false
     end
   end)
